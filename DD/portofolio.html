@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yashashree Portfolio</title>
+  <style>
+    :root {
+      --primary: #0066cc;
+      --bg-light: #f8f9fa;
+      --bg-dark: #121212;
+      --text-light: #333;
+      --text-dark: #f1f1f1;
+      --card-light: #fff;
+      --card-dark: #1e1e1e;
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: var(--bg-light);
+      color: var(--text-light);
+      transition: background 0.4s, color 0.4s;
+    }
+
+    header {
+      background: linear-gradient(90deg, #0046ad, #0066cc);
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      animation: slideDown 1s ease-out;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    nav a {
+      margin: 0 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    #toggle-mode {
+      position: absolute;
+      right: 20px;
+      top: 25px;
+      background: white;
+      color: #0066cc;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+
+    .intro {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .intro img {
+      width: 300px;
+      border-radius: 15px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.15);
+      animation: fadeLeft 1s ease-in-out;
+    }
+
+    .intro-content {
+      flex: 1;
+      animation: fadeRight 1s ease-in-out;
+    }
+
+    @keyframes fadeLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes fadeRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* Typing Animation */
+    .typing {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #444;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid var(--primary);
+      width: 0;
+      animation: typing 10s steps(30, end) infinite, blink 1s step-end infinite;
+    }
+
+    @keyframes typing {
+      0%, 10% { width: 0 }
+      30%, 50% { width: 22ch }
+      70%, 100% { width: 0 }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    .skills-container, .achievement-list, .project-list, .blog-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .card {
+      background-color: var(--card-light);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      flex: 1 1 200px;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .teamwork img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Custom Form */
+    form {
+      margin-top: 30px;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+      background: transparent;
+    }
+
+    .form-group label {
+      position: absolute;
+      top: 14px;
+      left: 12px;
+      color: #666;
+      font-size: 16px;
+      pointer-events: none;
+      transition: 0.3s ease all;
+      background: var(--bg-light);
+      padding: 0 5px;
+    }
+
+    .form-group input:focus + label,
+    .form-group input:not(:placeholder-shown) + label,
+    .form-group textarea:focus + label,
+    .form-group textarea:not(:placeholder-shown) + label {
+      top: -10px;
+      left: 10px;
+      color: var(--primary);
+      font-size: 13px;
+    }
+
+    form button {
+      background-color: var(--primary);
+      color: #fff;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    footer {
+      background: #e9ecef;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* Dark Mode */
+    body.dark {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    body.dark .card {
+      background: var(--card-dark);
+      color: var(--text-dark);
+    }
+
+    body.dark header {
+      background: linear-gradient(90deg, #002d72, #003f99);
+    }
+
+    body.dark footer {
+      background: #1a1a1a;
+    }
+
+    @media(max-width: 768px) {
+      .intro {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .intro img {
+        margin: auto;
+      }
+
+      .typing {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Yashashree Roshan Khivansara</h1>
+  <button id="toggle-mode">Toggle Mode</button>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#portfolio">Teamwork</a>
+    <a href="#projects">Projects</a>
+    <a href="#blogs">Blogs</a>
+    <a href="#achievements">Achievements</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section id="home"><br><br><br>
+  <div class="intro">
+    <img src="C:\Users\HOME\Desktop\html\DD\yashu.png">
+    <div class="intro-content">
+      <h2>Hello, I'm Yashashree!</h2>
+      <div class="typing">A Passionate Coder | A Creative Hacker | A Tech Explorer</div>
+    </div>
+  </div>
+</section>
+
+<section id="about"><br><br><br>
+  <h2>About Me</h2>
+  <p>I am a passionate and focused individual currently pursuing a Bachelor of Computer Applications (BCA) from 2024 to 2027, with a strong belief in the <b>values of hard work, consistency, and a growth mindset</b>.Throughout my academic journey, I’ve been actively involved in <b>real-world learning experiences</b>, which include participating in prestigious <b>hackathons and tech events</b></p>
+  <p>
+    I’m enthusiastic about using technology to bring ideas to life. I'm a constant learner, committed to developing clean, creative, and effective digital solutions.
+    I love working in teams, brainstorming new concepts, and sharing knowledge.
+    I am a passionate and enthusiastic technology enthusiast with a deep love for innovation and the endless possibilities of the internet. My journey in the world of technology has been driven by curiosity and a constant desire to learn and grow.
+
+    With expertise in multiple programming languages and a strong foundation in web development, I am always eager to take on new challenges and push the boundaries of what's possible. My passion for technology extends beyond just coding -1 believe in using technology to solve real-world problems and make a positive impact.
+
+    <b>Innovation is at the core of everything I do.</b>
+
+    Whether it's developing efficient algorithms, creating user-friendly interfaces, or participating in hackathons, I strive to bring fresh perspectives and creative solutions to every project I undertake
+
+  </p>
+</section>
+
+<section id="skills"><br><br><br>
+  <h2>Skills</h2>
+  <div class="skills-container">
+    <div class="card">C / C++</div>
+    <div class="card">HTML5</div>
+    <div class="card">CSS3</div>
+    <div class="card">JavaScript</div>
+    <div class="card">Python</div>
+  </div>
+</section>
+
+<section id="portfolio"><br><br><br>
+  <h2>Teamwork & Collaboration</h2>
+  <p>I collaborate with tech enthusiasts and mentors to solve real-world challenges.</p>
+  <div class="teamwork">
+    <table>
+      <tr>
+        <td>
+          <img src="C:\Users\HOME\Desktop\html\DD\nasa photo.jpeg" height="500px" width="200px">
+        </td>
+        <td>
+          <img src="C:\Users\HOME\Desktop\html\DD\sachitech.jpeg" height="500px" width="200px">
+        </td>
+        <td>
+          <img src="C:\Users\HOME\Desktop\html\DD\vyapar vichar.jpeg" height="500px" width="200px">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img src="C:\Users\HOME\Desktop\html\DD\nasa certi.jpeg" height="300px" width="300px">
+        </td>
+        <td>
+          <img src="C:\Users\HOME\Desktop\html\DD\ggsp certificate.jpeg" height="300px" width="300px">
+        </td>
+        <td>
+          <img src="C:\Users\HOME\Desktop\html\DD\mit photo.jpeg" height="300px" width="300px">
+        </td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<section id="projects"><br><br><br>
+  <h2>Projects</h2>
+  <div class="project-list">
+    <div class="card">
+      <h3>Smart Waste Tracker</h3>
+      <p>IoT-based system that tracks garbage levels and sends alerts to municipalities.</p>
+      <a href="#">View Project</a>
+    </div>
+    <div class="card">
+      <h3>Personal Portfolio</h3>
+      <p>Fully responsive personal website made with HTML, CSS, and JS.</p>
+      <a href="#">View Project</a>
+    </div>
+  </div>
+</section>
+
+<section id="blogs"><br><br><br>
+  <h2>Blogs</h2>
+  <div class="blog-list">
+    <div class="card">
+      <h3>Hackathon Experience @ MIT-ADU</h3>
+      <p>Lessons learned, solutions built, and challenges faced during the 36-hour event.</p>
+      <a href="#">Read Blog</a>
+    </div>
+    <div class="card">
+      <h3>My Web Dev Journey</h3>
+      <p>From beginner HTML tags to fully functional apps, here's my path.</p>
+      <a href="#">Read Blog</a>
+    </div>
+  </div>
+</section>
+
+<section id="achievements"><br><br><br>
+  <h2>Achievements</h2>
+  <div class="achievement-list">
+    <div class="card">NASA Hackathon - Participant</div>
+    <div class="card">MIT-ADU Hackathon - Participant</div>
+    <div class="card">Guru Gobind Singh Hackathon - Participant</div>
+    <div class="card">Tech Udaan (Sandip University) - top 10</div>
+  </div>
+</section>
+
+<section id="contact"><br><br><br>
+  <h2>Contact Me</h2>
+  <form onsubmit="submitForm(event)">
+    <div class="form-group">
+      <input type="text" required placeholder=" " />
+      <label>Your Name</label>
+    </div>
+    <div class="form-group">
+      <input type="email" required placeholder=" " />
+      <label>Your Email</label>
+    </div>
+    <div class="form-group">
+      <textarea rows="5" required placeholder=" "></textarea>
+      <label>Your Message</label>
+    </div>
+    <button type="submit">Send</button>
+    <p id="form-status" style="margin-top:10px;"></p>
+  </form>
+</section>
+
+<footer>
+  &copy; 2025 Yashashree Roshan Khivansara | All Rights Reserved
+</footer>
+
+<script>
+  const toggleBtn = document.getElementById('toggle-mode');
+  toggleBtn.onclick = () => {
+    document.body.classList.toggle('dark');
+  };
+
+  function submitForm(e) {
+    e.preventDefault();
+    document.getElementById("form-status").innerText = "Message sent successfully!";
+    document.querySelector("form").reset();
+  }
+</script>
+
+</body>
+</html>
